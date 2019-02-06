@@ -31,15 +31,14 @@
         <td>harga barang</td>
         <td>jumlah barang</td>
     </tr>
-    <?php $i=1; ?>
-    @foreach($barang as $barang)
+    @foreach($barang as $key => $barang)
     <tr>
-      <input type="hidden" name="old_harga[{{$i++}}]" value="{{$barang->harga_barang}}">
-      <input type="hidden" name="barang_id[{{$i++}}]" value="{{$barang->id}}">
-      <input type="hidden" name="tanggal[{{$i++}}]"  value="{{ date('d-m-Y') }}">
+      <input type="hidden" name="old_harga[{{$key}}]" value="{{$barang->harga_barang}}">
+      <input type="hidden" name="barang_id[{{$key}}]" value="{{$barang->id}}">
+      <input type="hidden" name="tanggal[{{$key}}]"  value="{{ date('d-m-Y') }}">
       <td>{{$barang->nama_barang}}</td>
       <td>Rp.{{number_format($barang->harga_barang, 0)}}</td>
-      <td><input type="text" name="qty[{{$i++}}]" class="form-control"></td>
+      <td><input type="text" name="qty[{{$key}}]" class="form-control"></td>
     </tr>
 @endforeach
 </table>

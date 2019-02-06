@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Belanja;
 use App\Barang;
+use DB;
 
 
 class BelanjaController extends Controller
@@ -41,6 +42,7 @@ class BelanjaController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         // $belanja = new Belanja;
         // $belanja->barang_id = $request->barang_id;
         // $belanja->qty = $request->qty;
@@ -48,18 +50,25 @@ class BelanjaController extends Controller
         // $belanja->old_harga = $request->old_harga;
         // $belanja->save();
         // return redirect('belanja')->with('message', 'Data telah di Tambah.');
+        $marks = array();
+        
+        $items = array();
+		foreach ($request->qty as $key => $input)
+        {
 
-// foreach ($requese as $input)
-//             {
+            $marks = array(
+                'barang_id' => $request->barang_id[$key],
+                'qty' => $input,
+                'tanggal' => $request->tanggal[$key],
+                'old_harga' => $request->old_harga[$key]
+            );
 
-//                 $marks[] = new Belanja(array(
-//                     'barang_id'=>$input['barang_id'],
-//                     'qty'=>$input['qty'],
-//                     'tanggal'=>$input['tanggal'],
-//                     'old_harga'=>$input['old_harga']
-//                 ));
-//             }
-// Belanja::create($marks);
+            array_push($items, $marks);
+        }
+
+		DB::table('belanja')->insert($items);
+
+        return redirect('belanja')->with('message', 'Data telah di Tambah ke belanja.');
 
     }
 

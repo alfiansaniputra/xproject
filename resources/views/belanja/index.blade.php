@@ -33,7 +33,7 @@
     @foreach($belanja as $belanja)
     <tr>
       <th scope="row">{{$no++}}</th>
-      <td>{{$belanja->barang_id}}</td>
+      <td>{{$belanja->Barang['nama_barang']}}</td>
       <td>{{$belanja->qty}}</td>
       <td>{{$belanja->tanggal}}</td>
       <td>{{$belanja->old_harga}}</td>
